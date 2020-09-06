@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 
-function App() {
+import RecordListComponent from './components/record/recordList.component';
+import SearchFormComponent from './components/search/search.component';
+import { Container, LoaderWrapper } from './App.styles';
+import { propsType, stateType } from './model/component.type';
+
+const App = (props: propsType) => {
+  const { loading, error } = props;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <Container>
+        <h2> Next Interview App</h2>
+        {error && <p>Please try again later something went wrong</p>}
+        <SearchFormComponent />
+      </Container>
 
-export default App;
+      <Container>
+        <LoaderWrapper>
+          {loading && <CircularProgress color='primary' size='5rem' />}
+        </LoaderWrapper>
+
+        <RecordListComponent />
+      </Container>
+    </>
+  );
+};
+
+const mapStateToProps = (state: stateType) => ({
+  records: state.record.records,
+  term: state.record.term,
+  loading: state.record.loading,
+  error: state.record.error,
+  page: state.record.page,
+});
+
+export default connect(mapStateToProps)(App);
