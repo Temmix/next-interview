@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `Install packages client`
+### `Install packages for client`
 
 yarn install or npm install
 
