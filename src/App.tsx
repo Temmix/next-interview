@@ -4,7 +4,7 @@ import { CircularProgress } from '@material-ui/core';
 
 import RecordListComponent from './components/record/recordList.component';
 import SearchFormComponent from './components/search/search.component';
-import { Container, LoaderWrapper } from './App.styles';
+import { Container, LoaderWrapper, ErrorTitle } from './App.styles';
 import { propsType, stateType } from './model/component.type';
 
 const App = (props: propsType) => {
@@ -14,7 +14,9 @@ const App = (props: propsType) => {
     <>
       <Container>
         <h2> Next Interview App</h2>
-        {error && <p>Please try again later something went wrong</p>}
+        {error && (
+          <ErrorTitle>Please try again later something went wrong</ErrorTitle>
+        )}
         <SearchFormComponent />
       </Container>
 
