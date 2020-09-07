@@ -14,10 +14,10 @@ const App = (props: propsType) => {
     <>
       <Container>
         <h2> Next Interview App</h2>
+        <SearchFormComponent />
         {error && (
           <ErrorTitle>Please try again later something went wrong</ErrorTitle>
         )}
-        <SearchFormComponent />
       </Container>
 
       <Container>
