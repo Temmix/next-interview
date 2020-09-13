@@ -1,14 +1,21 @@
-import IRecordList from '../../model/IRecordList';
 import RecordActionTypes from './record.type';
 
 export type recordType = {
   type: string;
   payload: {
-    record: IRecordList;
+    records: []; //IRecordList;
     error: boolean;
     loading: boolean;
     page: number;
     term: string;
+  };
+};
+
+export type recordSearchType = {
+  type: string;
+  payload: {
+    term: string;
+    page: number;
   };
 };
 
@@ -18,6 +25,11 @@ export type recordSimpleType = {
 
 export const loadRecordsInit = (): recordSimpleType => ({
   type: RecordActionTypes.LOAD_RECORDS_INIT,
+});
+
+export const loadRecordsBegin = (payload: any): recordSearchType => ({
+  type: RecordActionTypes.LOAD_RECORDS_BEGIN,
+  payload,
 });
 
 export const loadRecordsSuccess = (payload: any): recordType => ({

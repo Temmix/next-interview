@@ -1,11 +1,12 @@
-import { recordType, recordSimpleType } from '../redux/actions/recordAction';
-import { fetchRecords } from '../redux/reducers/recordReducer';
 import { Dispatch } from 'react';
+import { recordType, recordSimpleType } from '../redux/actions/recordAction';
+//import { fetchRecords } from '../redux/reducers/recordReducer';
+import { loadRecordsBegin } from '../redux/actions/recordAction';
 
 export const loadRecords = (
-  pageNumber: number,
+  page: number,
   term: string,
   dispatch: Dispatch<recordType | recordSimpleType>
 ) => {
-  fetchRecords()(pageNumber, term, dispatch);
+  dispatch(loadRecordsBegin({ page, term }));
 };

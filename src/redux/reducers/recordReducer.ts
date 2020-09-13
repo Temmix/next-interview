@@ -1,12 +1,5 @@
-import { Dispatch } from 'react';
-import itunesApi from '../../service/itunesApi';
-import { recordType, recordSimpleType } from '../actions/recordAction';
+import { recordType } from '../actions/recordAction';
 import RecordActionTypes from '../actions/record.type';
-import {
-  loadRecordsSuccess,
-  loadRecordsFailure,
-  loadRecordsInit,
-} from '../actions/recordAction';
 
 export const initialState = {
   records: [],
@@ -35,7 +28,7 @@ export const recordReducer = (state = initialState, action: recordType) => {
         ...state,
         loading: false,
         error: false,
-        records: [...action.payload.record.records],
+        records: [...action.payload.records],
       };
     }
     case RecordActionTypes.LOAD_RECORDS_FAILURE: {
@@ -44,30 +37,4 @@ export const recordReducer = (state = initialState, action: recordType) => {
     default:
       return state;
   }
-};
-
-export const fetchRecords = () => {
-  return async (
-    pageNumber: number,
-    term: string,
-    dispatch: Dispatch<recordType | recordSimpleType>
-  ) => {
-    dispatch(loadRecordsInit());
-    try {
-      const newRecords = await itunesApi.getArtist({
-        page: pageNumber.toString(),
-        term,
-      });
-      // Api does not have pageNumber, only the pageSize
-      dispatch(
-        loadRecordsSuccess({
-          record: { records: newRecords.data.results },
-        })
-      );
-    } catch (error) {
-      dispatch(loadRecordsFailure());
-      // use custom error logger
-      console.log(error);
-    }
-  };
 };

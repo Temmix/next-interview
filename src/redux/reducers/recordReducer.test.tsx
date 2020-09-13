@@ -8,7 +8,7 @@ describe('todos reducer', () => {
     const emptyPayload: recordType = {
       type: '',
       payload: {
-        record: { records: [] },
+        records: [],
         error: false,
         loading: false,
         page: 1,
@@ -23,7 +23,7 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.CHANGE_PAGE,
         payload: {
-          record: { records: [] },
+          records: [],
           error: false,
           loading: false,
           page: 5,
@@ -38,7 +38,7 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.CHANGE_PAGE,
         payload: {
-          record: { records: [] },
+          records: [],
           error: false,
           loading: false,
           page: 1,
@@ -53,7 +53,7 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.CHANGE_TERM,
         payload: {
-          record: { records: [] },
+          records: [],
           error: false,
           loading: false,
           page: 1,
@@ -68,7 +68,7 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.CHANGE_TERM,
         payload: {
-          record: { records: [] },
+          records: [],
           error: false,
           loading: false,
           page: 1,
@@ -83,7 +83,7 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.LOAD_RECORDS_INIT,
         payload: {
-          record: { records: [] },
+          records: [],
           error: false,
           loading: true,
           page: 1,
@@ -98,14 +98,14 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.LOAD_RECORDS_SUCCESS,
         payload: {
-          record: { records: [{} as IRecord] },
+          records: [{ id: 1, name: 'some name' }],
           error: false,
           loading: false,
           page: 1,
           term: '',
         },
       })
-    ).toEqual({ ...initialState, records: [...[{} as IRecord]] });
+    ).toEqual({ ...initialState, records: [{ id: 1, name: 'some name' }] });
   });
 
   it('should handle start LOAD_RECORDS_FAILURE', () => {
@@ -113,7 +113,7 @@ describe('todos reducer', () => {
       recordReducer(undefined, {
         type: RecordActionTypes.LOAD_RECORDS_FAILURE,
         payload: {
-          record: { records: [] },
+          records: [],
           loading: false,
           error: false,
           page: 1,
