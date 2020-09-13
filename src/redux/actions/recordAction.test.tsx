@@ -1,15 +1,21 @@
 import {
   loadRecordsSuccess,
   loadRecordsFailure,
+  loadRecordsInit,
   changeTerm,
   changePage,
-  changeLoading,
-  changeError,
 } from './recordAction';
 import RecordActionTypes from './record.type';
 import IRecord from '../../model/IRecord';
 
 describe('Record Actions', () => {
+  it('Init on loading records from server', () => {
+    const expectedAction = {
+      type: RecordActionTypes.LOAD_RECORDS_INIT,
+    };
+    expect(loadRecordsInit()).toEqual(expectedAction);
+  });
+
   it('Success on loading records from server', () => {
     const record = {
       artistId: 5,
@@ -38,11 +44,8 @@ describe('Record Actions', () => {
 
     const expectedAction = {
       type: RecordActionTypes.LOAD_RECORDS_FAILURE,
-      payload: {
-        records: [...params.records],
-      },
     };
-    expect(loadRecordsFailure(params)).toEqual(expectedAction);
+    expect(loadRecordsFailure()).toEqual(expectedAction);
   });
 
   it('On change term ', () => {
@@ -73,45 +76,5 @@ describe('Record Actions', () => {
       payload: { ...params },
     };
     expect(changePage(params)).toEqual(expectedAction);
-  });
-
-  it('On change loading to true ', () => {
-    const params = { loading: true };
-
-    const expectedAction = {
-      type: RecordActionTypes.LOADING,
-      payload: { ...params },
-    };
-    expect(changeLoading(params)).toEqual(expectedAction);
-  });
-
-  it('On change loading to default ', () => {
-    const params = { loading: false };
-
-    const expectedAction = {
-      type: RecordActionTypes.LOADING,
-      payload: { ...params },
-    };
-    expect(changeLoading(params)).toEqual(expectedAction);
-  });
-
-  it('On change error to true ', () => {
-    const params = { error: true };
-
-    const expectedAction = {
-      type: RecordActionTypes.ERROR,
-      payload: { ...params },
-    };
-    expect(changeError(params)).toEqual(expectedAction);
-  });
-
-  it('On change error to default ', () => {
-    const params = { error: false };
-
-    const expectedAction = {
-      type: RecordActionTypes.ERROR,
-      payload: { ...params },
-    };
-    expect(changeError(params)).toEqual(expectedAction);
   });
 });

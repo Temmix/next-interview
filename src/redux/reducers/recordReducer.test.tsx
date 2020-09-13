@@ -18,66 +18,6 @@ describe('todos reducer', () => {
     expect(recordReducer(undefined, emptyPayload)).toEqual(initialState);
   });
 
-  it('should handle start ERROR', () => {
-    expect(
-      recordReducer(undefined, {
-        type: RecordActionTypes.ERROR,
-        payload: {
-          record: { records: [] },
-          error: true,
-          loading: false,
-          page: 1,
-          term: '',
-        },
-      })
-    ).toEqual({ ...initialState, error: true });
-  });
-
-  it('should handle default ERROR', () => {
-    expect(
-      recordReducer(undefined, {
-        type: RecordActionTypes.ERROR,
-        payload: {
-          record: { records: [] },
-          error: false,
-          loading: false,
-          page: 1,
-          term: '',
-        },
-      })
-    ).toEqual({ ...initialState });
-  });
-
-  it('should handle start LOADING', () => {
-    expect(
-      recordReducer(undefined, {
-        type: RecordActionTypes.LOADING,
-        payload: {
-          record: { records: [] },
-          error: false,
-          loading: true,
-          page: 1,
-          term: '',
-        },
-      })
-    ).toEqual({ ...initialState, loading: true });
-  });
-
-  it('should handle default LOADING', () => {
-    expect(
-      recordReducer(undefined, {
-        type: RecordActionTypes.LOADING,
-        payload: {
-          record: { records: [] },
-          error: false,
-          loading: false,
-          page: 1,
-          term: '',
-        },
-      })
-    ).toEqual({ ...initialState });
-  });
-
   it('should handle start CHANGE_PAGE', () => {
     expect(
       recordReducer(undefined, {
@@ -138,6 +78,21 @@ describe('todos reducer', () => {
     ).toEqual({ ...initialState });
   });
 
+  it('should handle start LOAD_RECORDS_INIT', () => {
+    expect(
+      recordReducer(undefined, {
+        type: RecordActionTypes.LOAD_RECORDS_INIT,
+        payload: {
+          record: { records: [] },
+          error: false,
+          loading: true,
+          page: 1,
+          term: '',
+        },
+      })
+    ).toEqual({ ...initialState, loading: true });
+  });
+
   it('should handle start LOAD_RECORDS_SUCCESS', () => {
     expect(
       recordReducer(undefined, {
@@ -153,48 +108,18 @@ describe('todos reducer', () => {
     ).toEqual({ ...initialState, records: [...[{} as IRecord]] });
   });
 
-  it('should handle default LOAD_RECORDS_SUCCESS', () => {
-    expect(
-      recordReducer(undefined, {
-        type: RecordActionTypes.LOAD_RECORDS_SUCCESS,
-        payload: {
-          record: { records: [] },
-          error: false,
-          loading: false,
-          page: 1,
-          term: '',
-        },
-      })
-    ).toEqual({ ...initialState });
-  });
-
   it('should handle start LOAD_RECORDS_FAILURE', () => {
     expect(
       recordReducer(undefined, {
-        type: RecordActionTypes.LOAD_RECORDS_SUCCESS,
+        type: RecordActionTypes.LOAD_RECORDS_FAILURE,
         payload: {
           record: { records: [] },
-          error: false,
           loading: false,
+          error: false,
           page: 1,
           term: '',
         },
       })
-    ).toEqual({ ...initialState, records: [] });
-  });
-
-  it('should handle default LOAD_RECORDS_FAILURE', () => {
-    expect(
-      recordReducer(undefined, {
-        type: RecordActionTypes.LOAD_RECORDS_SUCCESS,
-        payload: {
-          record: { records: [] },
-          error: false,
-          loading: false,
-          page: 1,
-          term: '',
-        },
-      })
-    ).toEqual({ ...initialState });
+    ).toEqual({ ...initialState, records: [], error: true });
   });
 });

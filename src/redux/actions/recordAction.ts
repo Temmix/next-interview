@@ -12,14 +12,21 @@ export type recordType = {
   };
 };
 
+export type recordSimpleType = {
+  type: string;
+};
+
+export const loadRecordsInit = (): recordSimpleType => ({
+  type: RecordActionTypes.LOAD_RECORDS_INIT,
+});
+
 export const loadRecordsSuccess = (payload: any): recordType => ({
   type: RecordActionTypes.LOAD_RECORDS_SUCCESS,
   payload,
 });
 
-export const loadRecordsFailure = (payload: any): recordType => ({
+export const loadRecordsFailure = (): recordSimpleType => ({
   type: RecordActionTypes.LOAD_RECORDS_FAILURE,
-  payload,
 });
 
 export const changeTerm = (payload: any): recordType => ({
@@ -29,15 +36,5 @@ export const changeTerm = (payload: any): recordType => ({
 
 export const changePage = (payload: any): recordType => ({
   type: RecordActionTypes.CHANGE_PAGE,
-  payload,
-});
-
-export const changeLoading = (payload: any): recordType => ({
-  type: RecordActionTypes.LOADING,
-  payload,
-});
-
-export const changeError = (payload: any): recordType => ({
-  type: RecordActionTypes.ERROR,
   payload,
 });
